@@ -7,125 +7,150 @@ import logo from '../img/townImg.png'
 export default function page() {
 
     const router = useRouter()
+    let [activeBtn, setActiveBtn] = React.useState([
+        {
+            isActive: false,
+            name: "Sign in"
+        },
+        {
+            isActive: false,
+            name: "Contact"
+        },
+        {
+            isActive: false,
+            name: "Booking"
+        },
+        {
+            isActive: false,
+            name: "Program"
+        },
+        {
+            isActive: false,
+            name: "Service"
+        },
+        {
+            isActive: false,
+            name: "About"
+        },
+    ])
 
-    const loginFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function loginFunction() {
         router.push('/login')
     }
 
-    const ContactFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function ContactFunction() {
         router.push('/contact')
     }
 
-    const BookingFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function BookingFunction() {
         router.push('/booking')
     }
 
-    const ProgramFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function ProgramFunction() {
         router.push('/program')
     }
 
-    const ServiceFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function ServiceFunction() {
         router.push('/servicepage')
     }
 
-    const AboutFunction = () => {
-        // setActive(prev => {
-        //     prev.map(item => {
-        //         return {
-        //             ...item,
-        //             isActive: item.name === "about" ? true : false,
-        //         }
-        //     })
-        // })
+    function AboutFunction() {
         router.push('/about')
     }
 
     const backHome = () => {
         router.push('/')
+        setActiveBtn(prev => {
+            return prev.map(item => {
+                return {...item, isActive: false}
+            })
+        })
     }
 
-    let [activeBtn, setActive] = React.useState([
-        {
-            isActive: false,
-            btn:loginFunction,
-            name: "Sign in"
-        },
-        {
-            isActive: false,
-            btn:ContactFunction,
-            name: "Contact"
-        },
-        {
-            isActive: false,
-            btn:BookingFunction,
-            name: "Booking"
-        },
-        {
-            isActive: false,
-            btn:ProgramFunction,
-            name: "Program"
-        },
-        {
-            isActive: false,
-            btn: ServiceFunction,
-            name: "Service"
-        },
-        {
-            isActive: true,
-            btn: AboutFunction,
-            name: "About"
-        },
-    ])
-    
+    const test = (BtnName) => {
+        console.log("Testing", BtnName)
+        if (BtnName === "About") {
+            AboutFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+        if (BtnName === "Service") {
+            ServiceFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+        if (BtnName === "Program") {
+            ProgramFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+        if (BtnName === "Booking") {
+            BookingFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+        if (BtnName === "Contact") {
+            ContactFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+        if (BtnName === "Sign in") {
+            loginFunction()
+            setActiveBtn(prev => {
+                console.log(prev)
+                return prev.map(item => {
+                    return {...item, isActive: item.name === BtnName ? true : false}
+                })
+            })
+        }
+
+    }
     const BtnOptions = () => {
         return activeBtn.map(item => {
-            return <p key={item.name} onClick={item.btn}
-                className={`
-                ${item.isActive ? "" : ""}
-                font-bold text-white cursor-pointer active:opacity-50 text-[1vw] p-2 rounded-2xl
-                `}>
-                {item.name}
-            </p>
+            return (
+  <p
+    key={item.name}
+    onClick={() => test(item.name)}
+    className={`
+      relative hover:bg-[#00000030] rounded-[2px]
+      font-bold text-white cursor-pointer active:opacity-50
+      text-[1vw] p-2 select-none
+      transition-all duration-300 ease-in-out
+      after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px]
+      after:w-full after:transition-transform after:duration-200 after:scale-x-0
+      after:origin-left after:bg-white
+      ${item.isActive ? "after:scale-x-100" : ""}
+    `}
+  >
+    {item.name}
+  </p>
+);
+
         })
     }
     return (
