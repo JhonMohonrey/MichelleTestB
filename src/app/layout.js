@@ -2,6 +2,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from './header/page'
 import Footer from './footer/page'
+import Image from 'next/image'
+import bgImage from './img/2845572.jpg'
+import bgImage2 from './img/902802.jpg'
+import bgImage3 from './img/948892.jpg'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +24,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-black">
       <body
         className={`h-screen flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* <div 
+          className='absolute bg-cover bg-center border-5 left-0 right-0 top-0 bottom-0 inset-0 '
+          style={{ backgroundImage: 'url("/img/2845572.jpg")' }}
+        >
+
+        </div> */}
+        <Image 
+          src={bgImage3}
+          alt="background"
+          className="absolute left-0 right-0 bottom-0 top-0
+          -z-10 h-screen object-cover opacity-80
+          "
+          fill priority
+        />
         <Header />
         {children}
         <Footer />

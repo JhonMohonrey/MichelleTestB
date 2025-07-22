@@ -5,37 +5,133 @@ import Image from 'next/image';
 import logo from '../img/townImg.png'
 
 export default function page() {
+
     const router = useRouter()
 
     const loginFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/login')
     }
 
     const ContactFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/contact')
     }
 
     const BookingFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/booking')
     }
 
     const ProgramFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/program')
     }
+
     const ServiceFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/servicepage')
     }
+
     const AboutFunction = () => {
+        // setActive(prev => {
+        //     prev.map(item => {
+        //         return {
+        //             ...item,
+        //             isActive: item.name === "about" ? true : false,
+        //         }
+        //     })
+        // })
         router.push('/about')
     }
 
     const backHome = () => {
         router.push('/')
     }
+
+    let [activeBtn, setActive] = React.useState([
+        {
+            isActive: false,
+            btn:loginFunction,
+            name: "Sign in"
+        },
+        {
+            isActive: false,
+            btn:ContactFunction,
+            name: "Contact"
+        },
+        {
+            isActive: false,
+            btn:BookingFunction,
+            name: "Booking"
+        },
+        {
+            isActive: false,
+            btn:ProgramFunction,
+            name: "Program"
+        },
+        {
+            isActive: false,
+            btn: ServiceFunction,
+            name: "Service"
+        },
+        {
+            isActive: true,
+            btn: AboutFunction,
+            name: "About"
+        },
+    ])
+    
+    const BtnOptions = () => {
+        return activeBtn.map(item => {
+            return <p key={item.name} onClick={item.btn}
+                className={`
+                ${item.isActive ? "" : ""}
+                font-bold text-white cursor-pointer active:opacity-50 text-[1vw] p-2 rounded-2xl
+                `}>
+                {item.name}
+            </p>
+        })
+    }
     return (
-      <header className="bg-blue-400 px-6 py-4 shadow-md">
+      <header className="bg-[#1e1e2f60] px-6 py-4 shadow-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div onClick={backHome} className='border flex items-center justify-center gap-2 active:opacity-50 '>
+            <div onClick={backHome} className='flex items-center justify-center gap-2 active:opacity-50 '>
                 <Image 
                     src={logo} 
                     className='w-8'
@@ -47,30 +143,7 @@ export default function page() {
             </div>
 
             <nav className="hidden md:flex gap-6 text-sm ">
-                <p onClick={loginFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    Sign in
-                </p>
-                <p onClick={ContactFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    Contact
-                </p>
-                <p onClick={BookingFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    Booking
-                </p>
-                <p onClick={ProgramFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    Program
-                </p>
-                <p onClick={ServiceFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    Service
-                </p>
-                <p onClick={AboutFunction}
-                className='font-bold text-white cursor-pointer active:opacity-50 text-[1vw]'>
-                    About
-                </p>
+                {BtnOptions()}
             </nav>
 
             <button className="md:hidden text-gray-300 hover:text-white">
